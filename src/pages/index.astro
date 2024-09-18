@@ -1,0 +1,115 @@
+---
+import Nav from '../components/Nav.astro';
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - MF DOOM</title>
+    <!-- Import Poppins font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="/styles/global.css" rel="stylesheet">
+    <style>
+        /* Tailwind customization to include Poppins */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('/background/Control-V.jpg') no-repeat center center fixed; /* Cover the full viewport */
+            background-size: cover; /* Cover the entire body */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* Ensure Layout takes full width and height, and can expand with content */
+        .layout {
+            min-height: 100vh; /* Ensure it starts with at least the height of the viewport */
+        }
+
+        /* Ensure main content area can grow and allow scrolling */
+        main {
+            padding: 20px; /* Adjust padding as needed */
+        }
+
+        /* Animation for scrolling effect */
+        .scroll-fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .scroll-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom styling for quotation marks */
+        .quote {
+            color: white;
+            font-style: italic; /* Italicize quotation marks */
+            font-weight: 400;
+        }
+
+        /* Custom styling for "ALL CAPS" text */
+        .highlight {
+            font-style: italic; /* Italicize text */
+        }
+
+        /* Ensure audio element is hidden */
+        audio {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <Nav />
+
+    <Layout title="MF DOOM" class="layout">
+        <main class="flex flex-col items-center justify-center min-h-screen w-full bg-transparent">
+            <div class="text-center">
+                <h1 class="text-6xl md:text-8xl lg:text-9xl text-white font-bold leading-tight font-poppins">
+                    <span class="text-white">Welcome To </span>
+                    <span class="text-white">MF</span>
+                    <span class="text-green-800">DOOM'S</span>
+                    <span class="text-white">website.</span>
+                </h1>
+                <p class="mt-8 text-2xl md:text-3xl lg:text-4xl text-white font-poppins scroll-fade-in">
+                    <span class="quote">"</span>
+                    <span class="text-white highlight">ALL</span> 
+                    <span class="text-green-800 highlight">CAPS</span> 
+                    when you spell the man's name
+                    <span class="quote">"</span>
+                </p>
+            </div>
+        </main>
+    </Layout>
+
+    <!-- Audio element for background music -->
+    <audio id="background-music" src="/public/music-file.mp3" autoplay loop></audio>
+
+    <script>
+        // Add scroll effect
+        document.addEventListener('scroll', function() {
+            const elements = document.querySelectorAll('.scroll-fade-in');
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    el.classList.add('visible');
+                }
+            });
+        });
+
+        // JavaScript to handle autoplay restrictions
+        document.addEventListener('click', () => {
+            const music = document.getElementById('background-music');
+            if (music) {
+                music.play();
+            }
+        });
+    </script>
+</body>
+</html>

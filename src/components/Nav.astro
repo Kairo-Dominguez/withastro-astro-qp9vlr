@@ -1,0 +1,97 @@
+---
+/* No special imports needed for Tailwind CSS if you have it set up globally. */
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Fire Effect Navigation</title>
+    
+    <!-- Import Poppins font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Green fire animation */
+        @keyframes green-fire {
+            0% {
+                text-shadow: 0 0 4px #00ff00, 0 0 6px #00ff00, 0 0 8px #00ff00, 0 0 10px #00ff00;
+            }
+            50% {
+                text-shadow: 0 0 6px #00ff00, 0 0 10px #00ff00, 0 0 14px #00ff00, 0 0 18px #00ff00;
+            }
+            100% {
+                text-shadow: 0 0 4px #00ff00, 0 0 6px #00ff00, 0 0 8px #00ff00, 0 0 10px #00ff00;
+            }
+        }
+
+        /* Hover effect with zoom and green fire */
+        .fire-effect {
+            display: inline-block;
+            transition: transform 0.3s ease, color 0.3s ease;
+            font-family: 'Poppins', sans-serif; /* Apply Poppins font */
+        }
+
+        .fire-effect:hover {
+            animation: green-fire 1s infinite;
+            color: #00ff00; /* Optional: Change text color on hover */
+            transform: scale(1.1); /* Zoom effect */
+        }
+
+        /* General font styling for navigation links */
+        nav a {
+            font-family: 'Poppins', sans-serif; /* Apply Poppins font to all links */
+            position: relative;
+            padding-bottom: 5px;
+            display: inline-block; /* Ensure border-bottom works */
+        }
+
+        /* Underline the active link with a white line */
+        .active {
+            border-bottom: 2px solid white; /* White underline for active page */
+        }
+    </style>
+</head>
+<body>
+<nav class="bg-transparent fixed top-0 left-0 right-0 z-50">
+    <div class="container mx-auto flex items-center justify-between p-4">
+        <!-- Logo (Image) -->
+        <div class="flex items-center">
+            <a href="/">
+                <!-- Set image size -->
+                <img src="/public/logo.png" alt="Site Logo" class="h-16 w-auto md:h-20 lg:h-24">
+            </a>
+        </div>
+
+        <!-- Navigation Links -->
+        <div id="nav-links" class="hidden md:flex space-x-8">
+            <a href="/" class="text-white text-lg md:text-2xl fire-effect hover:text-green-800 transition-all duration-300">Home</a>
+            <a href="/about" class="text-white text-lg md:text-2xl fire-effect hover:text-green-800 transition-all duration-300">About</a>
+
+            <a href="/gallery" class="text-white text-lg md:text-2xl fire-effect hover:text-green-800 transition-all duration-300">Gallery</a>
+            <a href="/albums" class="text-white text-lg md:text-2xl fire-effect hover:text-green-800 transition-all duration-300">Albums</a>
+        </div>
+    </div>
+</nav>
+
+
+    <!-- Your page content goes here -->
+
+    <script>
+        // JavaScript to add 'active' class to the current page link
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('#nav-links a');
+
+            navLinks.forEach(link => {
+                // Get the pathname from the href attribute
+                const linkPath = new URL(link.href).pathname;
+
+                // Check if the link's path matches the current path
+                if (linkPath === currentPath) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

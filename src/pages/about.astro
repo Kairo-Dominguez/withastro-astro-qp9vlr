@@ -1,0 +1,118 @@
+---
+import Nav from '../components/Nav.astro';
+import Layout from '../layouts/Layout.astro';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - MF DOOM</title>
+    <!-- Import Poppins font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="/styles/global.css" rel="stylesheet">
+    <style>
+        /* Tailwind customization to include Poppins */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('/background/Control-V.jpg') no-repeat center center fixed; /* Cover the full viewport */
+            background-size: cover; /* Cover the entire body */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* Ensure Layout takes full width and height, and can expand with content */
+        .layout {
+            min-height: 100vh; /* Ensure it starts with at least the height of the viewport */
+            display: flex;
+            flex-direction: column; /* Allow the layout to expand with content */
+        }
+
+        /* Ensure main content area can grow and allow scrolling */
+        main {
+            padding: 20px; /* Adjust padding as needed */
+            flex: 1; /* Allow it to grow with content */
+        }
+
+        /* Animation for scrolling effect */
+        .scroll-fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .scroll-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom styling for text */
+        .info-text {
+            color: white;
+            font-size: 1rem; /* Reduced font size for better fit */
+            line-height: 1.6; /* Increase line height for readability */
+            text-align: center;
+            max-width: 800px; /* Ensure text doesn't stretch too wide */
+            margin: 0 auto; /* Center align the text block */
+        }
+
+        h1 {
+            font-size: 4rem; /* Adjust header size */
+            line-height: 1.2; /* Tighten line height */
+        }
+
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 5rem; /* Adjust header size for larger screens */
+            }
+        }
+
+        @media (min-width: 1024px) {
+            h1 {
+                font-size: 6rem; /* Adjust header size for even larger screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <Nav />
+
+    <Layout title="About - MF DOOM" class="layout">
+        <main class="flex flex-col items-center justify-center min-h-screen w-full bg-transparent">
+            <div class="text-center">
+                <!-- Removed 'scroll-fade-in' class from the h1 tag -->
+                <h1 class="text-white font-bold leading-tight font-poppins">
+                    <span class="text-white">About </span>
+                    <span class="text-white">MF</span>
+                    <span class="text-green-800">DOOM'S</span>
+                    <span class="text-white">Life</span>
+                </h1>
+                <p class="mt-8 info-text scroll-fade-in">
+                    MF DOOM, born Daniel Dumile on January 9, 1971, in London, England, was a legendary figure in the world of hip-hop. He moved to the United States as a child and was raised in Long Island, New York. Dumile began his musical career in the early 1990s under the name Zev Love X, part of the group KMD.
+                    <br><br>
+                    After KMD disbanded, Dumile re-emerged in the late 1990s with a new persona, MF DOOM, wearing a distinctive metal mask that became his trademark. His debut solo album, "Operation: Doomsday" (1999), received critical acclaim for its innovative production and intricate lyrics. MF DOOM went on to influence countless artists with his complex wordplay, unique voice, and mysterious persona.
+                    <br><br>
+                    Despite his significant impact on hip-hop, MF DOOM's life ended on October 31, 2020, at the age of 49. The cause of his death was not publicly disclosed until later, revealing that he had passed away due to complications from a prolonged illness. His passing was a significant loss to the music community, but his legacy continues to resonate through his extensive and influential body of work. <span class="text-green-800 font-bold">REST IN PEACE MF DOOM</span>
+                </p>
+            </div>
+        </main>
+    </Layout>
+
+    <script>
+        // Add scroll effect
+        document.addEventListener('scroll', function() {
+            const elements = document.querySelectorAll('.scroll-fade-in');
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    el.classList.add('visible');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
